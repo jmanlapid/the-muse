@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 class ListItem extends React.Component {
   constructor(props) {
     super(props)
-    console.log('lol okay', props)
+    // console.log('lol okay', props)
   }
 
   render() {
