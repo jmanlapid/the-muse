@@ -8,15 +8,14 @@ class JobDescending extends React.Component {
   }
 
   toggleCheckbox(event) {
-    let value = event.target.value
-    console.log(value)
-    this.props.handleDescending(value)
+    let checked = event.target.checked
+    this.props.handleDescending(checked)
   }
 
   render() {
     return (
       <form>
-        <h4>Job Descending</h4>
+        <h4>Descending</h4>
         <input type="checkbox" id="descending" value={ true } onChange={ this.toggleCheckbox } />
         <label htmlFor="descending">Descending</label>
       </form>

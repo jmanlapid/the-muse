@@ -13,6 +13,7 @@ class AppContainer extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDescending = this.handleDescending.bind(this)
     this.state = {
       jobs: [],
       page: 0,
@@ -37,7 +38,6 @@ class AppContainer extends React.Component {
     jobsService.getJobs(params)
     .then((res) => {
       let data = res.data
-      console.log('RESULTS LENGTH', data.results.length)
       this.setState({
         page: data.page,
         pageCount: data.page_count,
@@ -77,16 +77,28 @@ class AppContainer extends React.Component {
     this.getJobs(newParams)
   }
 
-  handleDescending(value) {
-    console.log(value)
+  handleDescending(checked) {
+    if (typeof checked !== 'boolean') {
+      throw new Error('param[0]', checked, 'is not a boolean')
+    }
+
     let newParams = this.state.params
-    newParams.descending = value || false
+    newParams.descending = checked
+    this.setState({ params: newParams })
+    this.getJobs(newParams)
   }
 
   render() {
-    let jobsList = this.state.jobs.map((job, index) => {
-      return <ListItem job={ job } key={ index }></ListItem>
-    })
+    let jobsList
+
+    if (this.state.jobs.length) {
+      jobsList = this.state.jobs.map((job, index) => {
+        return <ListItem job={ job } key={ index }></ListItem>
+      })
+    } else {
+      jobsList = <h4>No search results fit your criteria</h4>
+
+    }
 
     return (
       <div className="container">
@@ -108,21 +120,12 @@ class AppContainer extends React.Component {
           </div>
         </div>
         <div className="row">
-          {!jobsList.length &&
-            <h4>No search results fit your criteria</h4>
-          }
-          {jobsList.length &&
-            <ul className="collection">
-              { jobsList }
-            </ul>
-          }
+          <div className="collection">
+            { jobsList }
+          </div>
         </div>
       </div>
     )
-  }
-
-  changeParams() {
-
   }
 }
 

@@ -17,13 +17,13 @@ class ListItem extends React.Component {
     }).toString()
 
     return (
-      <li className="collection-item">
+      <a href={ this.props.job.refs.landing_page } className="collection-item">
         <h5>{ this.props.job.name }</h5>
          <p>{ this.props.job.company.name } <br/>
             { locations } <br/>
             { levels }
          </p>
-      </li>
+      </a>
     )
   }
 }
