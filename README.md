@@ -1,3 +1,7 @@
+## Running Locally
+- `npm install`
+- `npm start`
+
 ## Architecture
 
 - `src`
@@ -16,3 +20,6 @@
 
 ## Parameter Logic
   State params is an object of which its properties (companies, level, location, category) aside from descending have a value of a js prototype Set ie { 'Entry Level', 'Mid Level' }. They are added/removed to the property of the state params whenever a checkbox is hit with the passed in `handleChange` to the dumb component. The state params are sent to the JobsService which take loop through each property and encode it for the http call.
+
+## Stretch Goals
+- Develop pagination component which manages the `page` param. The current state of the application always defaults to `page: 0` whenever a checkbox is changed with no way to scroll through the pages.
